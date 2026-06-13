@@ -15,4 +15,4 @@ data/
 .DS_Store
 
 # Private design/interview notes - not for the public repo
-docs/DESIGN.md
+docs/DESIGN.md.env

@@ -37,10 +37,6 @@ pool applies those events to the actual store at whatever rate the storage
 layer can sustain. Reads are served from a `ConcurrentHashMap` cache in
 front of a simple JSON-file-per-document disk layout.
 
-See [`docs/DESIGN.md`](docs/DESIGN.md) for the full design rationale,
-trade-offs considered, and how to reproduce the benchmark numbers
-referenced below. (That file is intentionally excluded from version
-control via `.gitignore` -- it's personal interview/prep notes.)
 
 ## Architecture at a glance
 
@@ -168,10 +164,3 @@ This will:
 - **Atomic disk writes**: documents are written to a temp file and moved
   into place with `ATOMIC_MOVE`, so a crash mid-write never corrupts a
   document file.
-
-## Limitations / not implemented
-
-This is a learning/portfolio project, not a production datastore. Notably
-absent: replication/HA, range queries or secondary indexes, schema
-validation, authentication, and a true O(1) LRU cache. These are discussed
-along with rationale in `docs/DESIGN.md`.

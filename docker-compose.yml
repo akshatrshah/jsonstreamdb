@@ -1,0 +1,22 @@
+services:
+  kafka:
+    image: apache/kafka:3.7.0
+    container_name: jsonstreamdb-kafka
+    ports:
+      - "9094:9092"
+    environment:
+      # --- KRaft (no Zookeeper) single-node configuration ---
+      KAFKA_NODE_ID: 1
+      KAFKA_PROCESS_ROLES: broker,controller
+      KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092,CONTROLLER://0.0.0.0:9093
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9094
+      KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT
+      KAFKA_CONTROLLER_QUORUM_VOTERS: 1@localhost:9093
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
+      # Convenient for local dev so the demo topic doesn't need to be created manually
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: "true"
+      # More partitions = more parallelism for the consumer worker pool
+      KAFKA_NUM_PARTITIONS: 6

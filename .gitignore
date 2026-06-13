@@ -1,0 +1,18 @@
+# Build output
+target/
+*.class
+dependency-reduced-pom.xml
+
+# Runtime data created by the app / docker volumes
+data/
+
+# IDE
+.idea/
+*.iml
+.vscode/
+
+# OS
+.DS_Store
+
+# Private design/interview notes - not for the public repo
+docs/DESIGN.md
